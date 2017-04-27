@@ -1,0 +1,8 @@
+{
+  "name": "baiji-api",
+  "description": "Api for baiji app",
+  "memory": 128,
+  "timeout": 5,
+  "role": "arn:aws:iam::889274615573:role/baiji-api_lambda_function",
+  "environment": {}
+}
