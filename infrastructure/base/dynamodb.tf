@@ -1,0 +1,1 @@
+//==== Dynamodb template are here ==== //
