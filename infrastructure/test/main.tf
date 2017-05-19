@@ -1,5 +1,17 @@
+variable "account_id" {
+  default = "123123123"
+}
+
+variable "region" {
+  default = "us-east-1"
+}
+
+variable "environment" {
+  default = "test"
+}
+
 provider "aws" {
-  region = "us-east-1"
+  region = "${var.region}"
 }
 
 module "sites_table" {
@@ -22,16 +34,28 @@ module "get_sites_api" {
   source = "../base/apigateway"
   rest_api_id = "${aws_api_gateway_rest_api.baiji-test.id}"
   resource_id = "${aws_api_gateway_resource.sites.id}"
+  http_method = "GET"
+  account_id = "${var.account_id}"
+  region = "${var.region}"
+  lambda_name = "get_sites_api-${var.environment}"
 }
 
 module "get_site_api" {
   source = "../base/apigateway"
   rest_api_id = "${aws_api_gateway_rest_api.baiji-test.id}"
   resource_id = "${aws_api_gateway_resource.sites.id}"
+  http_method = "GET"
+  account_id = "${var.account_id}"
+  region = "${var.region}"
+  lambda_name = "get_site_api-${var.environment}"
 }
 
 module "create_sites_api" {
   source = "../base/apigateway"
   rest_api_id = "${aws_api_gateway_rest_api.baiji-test.id}"
   resource_id = "${aws_api_gateway_resource.sites.id}"
+  http_method = "POST"
+  account_id = "${var.account_id}"
+  region = "${var.region}"
+  lambda_name = "create_sites_api-${var.environment}"
 }
