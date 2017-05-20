@@ -17,6 +17,7 @@ provider "aws" {
 module "sites_table" {
   source = "../base/dynamo"
   name = "sites"
+  hash_key = "site_id"
 }
 
 resource "aws_api_gateway_rest_api" "baiji-test" {
