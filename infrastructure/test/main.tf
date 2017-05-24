@@ -18,6 +18,8 @@ module "sites_table" {
   source = "../base/dynamo"
   name = "sites"
   hash_key = "site_id"
+  read_capacity = "10"
+  write_capacity = "10"
 }
 
 resource "aws_api_gateway_rest_api" "baiji-test" {
