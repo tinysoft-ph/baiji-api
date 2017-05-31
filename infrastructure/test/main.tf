@@ -1,9 +1,9 @@
 variable "account_id" {
-  default = "123123123"
+  default = "889274615573"
 }
 
 variable "region" {
-  default = "us-east-1"
+  default = "ap-northeast-1"
 }
 
 variable "environment" {
@@ -40,7 +40,7 @@ module "get_sites_api" {
   http_method = "GET"
   account_id = "${var.account_id}"
   region = "${var.region}"
-  lambda_name = "get_sites_api-${var.environment}"
+  lambda_name = "baiji-api_getsites"
 }
 
 module "get_site_api" {
@@ -50,7 +50,7 @@ module "get_site_api" {
   http_method = "GET"
   account_id = "${var.account_id}"
   region = "${var.region}"
-  lambda_name = "get_site_api-${var.environment}"
+  lambda_name = "baiji-api_getsites"
 }
 
 module "create_sites_api" {
@@ -60,5 +60,5 @@ module "create_sites_api" {
   http_method = "POST"
   account_id = "${var.account_id}"
   region = "${var.region}"
-  lambda_name = "create_sites_api-${var.environment}"
+  lambda_name = "baiji-api_createsite"
 }

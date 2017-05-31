@@ -18,6 +18,7 @@ resource "aws_api_gateway_integration" "ResourceMethodIntegration" {
 }
 
 resource "aws_api_gateway_integration_response" "ResourceMethodIntegration200" {
+  depends_on = [ "aws_api_gateway_integration.ResourceMethodIntegration" ]
   rest_api_id = "${var.rest_api_id}"
   resource_id = "${var.resource_id}"
   http_method = "${aws_api_gateway_method.ResourceMethod.http_method}"
@@ -29,6 +30,7 @@ resource "aws_api_gateway_integration_response" "ResourceMethodIntegration200" {
 }
 
 resource "aws_api_gateway_integration_response" "ResourceMethodIntegration400" {
+  depends_on = [ "aws_api_gateway_integration.ResourceMethodIntegration" ]
   rest_api_id = "${var.rest_api_id}"
   resource_id = "${var.resource_id}"
   http_method = "${aws_api_gateway_method.ResourceMethod.http_method}"
@@ -40,6 +42,7 @@ resource "aws_api_gateway_integration_response" "ResourceMethodIntegration400" {
 }
 
 resource "aws_api_gateway_method_response" "ResourceMethod200" {
+  depends_on = [ "aws_api_gateway_integration.ResourceMethodIntegration" ]
   rest_api_id = "${var.rest_api_id}"
   resource_id = "${var.resource_id}"
   http_method = "${aws_api_gateway_method.ResourceMethod.http_method}"
@@ -49,6 +52,7 @@ resource "aws_api_gateway_method_response" "ResourceMethod200" {
 }
 
 resource "aws_api_gateway_method_response" "ResourceMethod400" {
+depends_on = [ "aws_api_gateway_integration.ResourceMethodIntegration" ]
   rest_api_id = "${var.rest_api_id}"
   resource_id = "${var.resource_id}"
   http_method = "${aws_api_gateway_method.ResourceMethod.http_method}"

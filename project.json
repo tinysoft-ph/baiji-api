@@ -4,5 +4,12 @@
   "memory": 128,
   "timeout": 5,
   "role": "arn:aws:iam::889274615573:role/baiji-api_lambda_function",
-  "environment": {}
+  "handler": "dist.default",
+  "runtime": "nodejs6.10",
+  "environment": {
+  },
+  "hooks" : {
+	  "build": "../../node_modules/.bin/webpack --config ../../webpack.config.js --bail",
+	  "clean": "rm -fr lib"
+  }
 }
