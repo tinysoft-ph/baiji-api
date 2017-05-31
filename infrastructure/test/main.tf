@@ -41,6 +41,7 @@ module "get_sites_api" {
   account_id = "${var.account_id}"
   region = "${var.region}"
   lambda_name = "baiji-api_getsites"
+  integration_response_template = ""
 }
 
 module "get_site_api" {
