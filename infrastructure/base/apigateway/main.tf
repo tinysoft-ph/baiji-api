@@ -29,15 +29,16 @@ resource "aws_api_gateway_integration_response" "ResourceMethodIntegration200" {
   response_templates = { "application/json" = "${var.integration_response_template}" }
 }
 
-resource "aws_api_gateway_integration_response" "ResourceMethodIntegration400" {
+resource "aws_api_gateway_integration_response" "ResourceMethodIntegration404" {
   depends_on = [ "aws_api_gateway_integration.ResourceMethodIntegration" ]
   rest_api_id = "${var.rest_api_id}"
   resource_id = "${var.resource_id}"
   http_method = "${aws_api_gateway_method.ResourceMethod.http_method}"
-  status_code = "${aws_api_gateway_method_response.ResourceMethod400.status_code}"
+  status_code = "${aws_api_gateway_method_response.ResourceMethod404.status_code}"
   response_templates = {
     "application/json" = "${var.integration_error_template}"
   }
+  selection_pattern = ".*\"NotFound\".*"
   response_parameters = { "method.response.header.Access-Control-Allow-Origin" = "'*'" }
 }
 
@@ -51,12 +52,12 @@ resource "aws_api_gateway_method_response" "ResourceMethod200" {
   response_parameters = { "method.response.header.Access-Control-Allow-Origin" = true }
 }
 
-resource "aws_api_gateway_method_response" "ResourceMethod400" {
+resource "aws_api_gateway_method_response" "ResourceMethod404" {
 depends_on = [ "aws_api_gateway_integration.ResourceMethodIntegration" ]
   rest_api_id = "${var.rest_api_id}"
   resource_id = "${var.resource_id}"
   http_method = "${aws_api_gateway_method.ResourceMethod.http_method}"
-  status_code = "400"
+  status_code = "404"
   response_models = { "application/json" = "Error" }
   response_parameters = { "method.response.header.Access-Control-Allow-Origin" = true }
 }

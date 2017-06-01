@@ -33,6 +33,13 @@ resource "aws_api_gateway_resource" "sites" {
   path_part = "sites"
 }
 
+resource "aws_api_gateway_resource" "site-by-id" {
+  depends_on = [ "aws_api_gateway_resource.sites" ]
+  rest_api_id = "${aws_api_gateway_rest_api.baiji-test.id}"
+  parent_id = "${aws_api_gateway_resource.sites.id}"
+  path_part = "{siteId}"
+}
+
 module "get_sites_api" {
   source = "../base/apigateway"
   rest_api_id = "${aws_api_gateway_rest_api.baiji-test.id}"
@@ -47,7 +54,7 @@ module "get_sites_api" {
 module "get_site_api" {
   source = "../base/apigateway"
   rest_api_id = "${aws_api_gateway_rest_api.baiji-test.id}"
-  resource_id = "${aws_api_gateway_resource.sites.id}"
+  resource_id = "${aws_api_gateway_resource.site-by-id.id}"
   http_method = "GET"
   account_id = "${var.account_id}"
   region = "${var.region}"
